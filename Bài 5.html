@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Danh sách nhân viên Rekkei Academy</h2>
+    <button onclick="addStaff()"> Hiển thị nhân viên</button>
+    <table id="table" border="1px">
+    </table>
+    <input id="input" type = "text" style="display: none;" >
+    <script>
+        let listStaffs=["Nguyễn Văn A","Nguyễn Văn B","Nguyễn Văn C"];   
+        function rederListStaffs(){
+            let result = "";
+            for(let i = 0;i < listStaffs.length; i++){
+                result+=
+                `
+                    <tr>
+                        <td>
+                            ${listStaffs[i]}
+                        </td>
+                        <td>
+                            <button onclick="editStaff(${i})">Edit</button>
+                        </td>
+                        <td>
+                            <button onclick="deleteStaff(${i})">Delete</button>
+                        </td>
+                    </tr>
+                `
+            }   document.getElementById("table").innerHTML=result;
+        }
+        function addStaff() {
+            let valueInput=document.getElementById("input").value;
+            listStaffs.push(valueInput);
+            rederListStaffs();
+            document.getElementById("input").value="";
+            }
+        function deleteStaff(id){
+            listStaffs.splice(id,1);
+            rederListStaffs();
+        }
+        function editStaff(id){
+            console.log("id",id)
+            document.getElementById("input").value=listStaffs[id];
+            let valueChangeInput=prompt(`Cập nhật nhân viên,${listStaffs[id]}`);
+            listStaffs.splice(id,1,valueChangeInput);
+            rederListStaffs();
+            document.getElementById("input").value="";
+        }
+        
+    </script>
+</body>
+</html>
